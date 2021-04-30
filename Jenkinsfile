@@ -23,14 +23,18 @@ pipeline {
 
     post {
         failure {
-            mail body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
-                to: 'kin.baryczka@gmail.com', 
-                subject: 'Build failed in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+            emailext attachLog: true,
+                body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
+                recipientProviders: [developers(), requestor()],
+                to: 'kin.baryczka@gmail.com',
+                subject: 'Build failed in Jenkins: ${currentBuild.currentResult}: Job ${env.JOB_NAME}'
         }
         success {
-            mail body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
+            emailext attachLog: true,
+                body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
+                recipientProviders: [developers(), requestor()],
                 to: 'kin.baryczka@gmail.com',
-                subject: 'Successful build in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+                subject: 'Successful build in Jenkins: ${currentBuild.currentResult}: Job ${env.JOB_NAME}'
         }
     }
 }
