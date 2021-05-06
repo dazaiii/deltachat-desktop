@@ -9,15 +9,13 @@ pipeline {
             }
             post {
                 failure {
-                    emailext
-                        body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
+                    emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
                         to: 'kin.baryczka@gmail.com',
                         subject: "Build failed in Jenkins Job ${env.JOB_NAME}"
                     sh 'false'
                 }
                 success {
-                    emailext
-                        body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
+                    emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
                         to: 'kin.baryczka@gmail.com',
                         subject: "Successful build in Jenkins Job ${env.JOB_NAME}"
                 }
@@ -30,15 +28,13 @@ pipeline {
             }
             post {
                 failure {
-                    emailext
-                        body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
+                    emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
                         to: 'kin.baryczka@gmail.com',
                         subject: "Tests failed in Jenkins Job ${env.JOB_NAME}"
                     sh 'false'
                 }
                 success {
-                    emailext
-                        body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
+                    emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
                         to: 'kin.baryczka@gmail.com',
                         subject: "Successful tests in Jenkins Job ${env.JOB_NAME}"
                 }
