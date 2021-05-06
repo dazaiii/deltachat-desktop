@@ -15,7 +15,6 @@ pipeline {
                     sh 'false'
                 }
                 success {
-                    sh 'false'
                     emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
                         to: 'kin.baryczka@gmail.com',
                         subject: "Successful build in Jenkins Job ${env.JOB_NAME}"
@@ -35,7 +34,6 @@ pipeline {
                     sh 'false'
                 }
                 success {
-                    sh 'false'
                     emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
                         to: 'kin.baryczka@gmail.com',
                         subject: "Successful tests in Jenkins Job ${env.JOB_NAME}"
