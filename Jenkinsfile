@@ -13,6 +13,7 @@ pipeline {
                         body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
                         to: 'kin.baryczka@gmail.com',
                         subject: "Build failed in Jenkins Job ${env.JOB_NAME}"
+                    sh 'false'
                 }
                 success {
                     emailext
@@ -33,6 +34,7 @@ pipeline {
                         body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
                         to: 'kin.baryczka@gmail.com',
                         subject: "Tests failed in Jenkins Job ${env.JOB_NAME}"
+                    sh 'false'
                 }
                 success {
                     emailext
