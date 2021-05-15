@@ -43,6 +43,20 @@ pipeline {
         stage('Deploy') { 
             steps {
                 echo 'Deploying'
+                sh 'docker build -t deltachat -f docker/Dockerfile.deploy .'
+            }
+            post {
+                failure {
+                    emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
+                        to: 'kin.baryczka@gmail.com',
+                        subject: "Deploy failed in Jenkins Job ${env.JOB_NAME}"
+                    sh 'false'
+                }
+                success {
+                    emailext body: "Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
+                        to: 'kin.baryczka@gmail.com',
+                        subject: "Successful deploy in Jenkins Job ${env.JOB_NAME}"
+                }
             }
         }
     }
